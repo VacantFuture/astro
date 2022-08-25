@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Mast from '../components/Mast.astro';
+import Footer from '../components/Footer.astro';
+// import Feature from '../components/Feature.astro';
+// import TextFeed from '../components/TextFeed.astro';
+import MediaFeed from '../components/MediaFeed.astro';
+// import SmNewsletter from '../components/SmNewsletter.astro';
+// import AD300x600 from '../components/AD300x600.astro';
+
+const cat = Astro.params;
+
+
+export async function getStaticPaths() {
+    const data = await fetch('http://localhost:1337/api/getCategories').then((response) => response.json());
+    // console.log(data)
+    let staticPaths = [];
+    data.map(item => (staticPaths.push({ "params": { category: item.Category }, "props": { category: item.Category } })))
+    // console.log(staticPaths)
+    return staticPaths
+
+}
+
+const feed = await fetch("http://localhost:1337/api/getCategory/" + cat.category).then((response) => response.json())
+
+---
+
+<div class="mw9-ns center">
+    <Mast />
+    <h1>Category: { cat.category } </h1>
+
+    <MediaFeed mediaFeed={feed} />
+
+    <Footer />
+</div>

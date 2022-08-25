@@ -1,0 +1,32 @@
+---
+
+const { featured } = Astro.props;
+const featureBackground = featured.image_url;
+
+
+---
+
+<div class="aspect-ratio aspect-ratio--4x3 mb4">
+
+    <div class="aspect-ratio--object cover dt" style={{backgroundImage: `url(${featureBackground})`, zIndex: "-1" }}>
+        <div class="dtc v-btm">
+            <!-- <header class="white-70">
+                        <h2 class="f6 fw1 ttu tracked mb2 lh-title">Issue Six</h2>
+                        <h3 class="f6 fw1 lh-title">Summer MMXVI</h3>
+                    </header>
+                    <h1 class="f1 f-headline-l fw1 i white-60">The Chronicles</h1> -->
+            <blockquote class="ph0 mh0 f4 lh-copy center bg-white-60">
+                <a href={featured.seo_url}>
+                    <h1 class="pl3 black-70">
+                        { featured.title }
+                    </h1>
+                </a>
+
+                <cite class="f6 ttu tracked fs-normal">Massimo Vignelli</cite>
+            </blockquote>
+        </div>
+    </div>
+
+
+
+</div>

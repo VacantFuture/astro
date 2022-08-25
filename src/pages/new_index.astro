@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Mast from '../components/Mast.astro';
+import Feature from '../components/Feature.astro';
+import TextFeed from '../components/TextFeed.astro';
+import MediaFeed from '../components/MediaFeed.astro';
+import SmNewsletter from '../components/SmNewsletter.astro';
+import AD300x600 from '../components/AD300x600.astro';
+
+const featuredArticle = await fetch("http://localhost:1337/api/getFeature").then((res) => res.json());
+const articleFeed = await fetch("http://localhost:1337/api/getFeed").then((res) => res.json());
+
+const primeFeed = articleFeed.slice(0, 2);
+const mediaFeed = articleFeed.slice(4, 8);
+const endFeed = articleFeed.slice(8)
+
+---
+
+<Layout title="North Country Voice">
+
+    <div class="mw9-ns center">
+        <Mast />
+        <div>
+
+            <section class="cf mw9 center mb4-ns mt5-l">
+                <div class="fl w-100 w-50-ns">
+
+                    <Feature featured={featuredArticle} />
+                </div>
+                <div class="fl w-100 w-40-ns">
+                    <!-- <TextFeed :Feed="primeFeed" /> -->
+                    <div class="pa4-ns pt0-ns">
+                        <img src="https://via.placeholder.com/300x250.png" class="pl4-ns ml2" alt="">
+                    </div>
+                    <TextFeed primeFeed={primeFeed} />
+                </div>
+            </section>
+            <section class="cf mw9 center mb4-ns mt5-ns">
+                <div class="fl w-100 w-50-ns">
+
+                    <MediaFeed mediaFeed={mediaFeed} />
+                </div>
+                <div class="fl w-100 w-40-ns pl4-ns">
+                    <SmNewsletter />
+                    <AD300x600 />
+                </div>
+            </section>
+            <section class="cf mw9 center mb4-ns mt-5-ns">
+                <div class="fl w-100 w-50-ns">
+
+                    <TextFeed primeFeed={endFeed} />
+                </div>
+                <div class="fl w-100 w-40-ns">
+
+                </div>
+            </section>
+        </div>
+
+        <!-- <Footer /> -->
+    </div>
+</Layout>
