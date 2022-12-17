@@ -1,29 +1,49 @@
 ---
 export interface Props {
-	title: string;
+  title: string;
 }
 
-import 'tachyons/css/tachyons.css';
-
-
+import "tachyons/css/tachyons.css";
 
 const { title } = Astro.props as Props;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width" />
-	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-	<meta name="generator" content={Astro.generator} />
-	<title>{title}</title>
-</head>
+  <body>
+    <slot />
+    <style>
+      a {
+        text-decoration: none;
+        transition: color 0.15s ease-in;
+        color: #a463f2;
+      }
 
-<body>
+      a:link,
+      a:visited {
+        transition: color 0.15s ease-in;
+      }
 
-	<slot />
-</body>
+      a:hover {
+        transition: color 0.15s ease-in;
+      }
 
+      a:active {
+        transition: color 0.15s ease-in;
+      }
+
+      a:focus {
+        transition: color 0.15s ease-in;
+        outline: 1px dotted currentColor;
+      }
+    </style>
+  </body>
 </html>

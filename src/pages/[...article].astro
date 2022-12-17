@@ -1,94 +1,88 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Mast from '../components/Mast.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import Mast from "../components/Mast.astro";
+import Footer from "../components/Footer.astro";
 
 export async function getStaticPaths() {
-    let data = await fetch('http://localhost:1337/api/getSlugs').then((response) => response.json())
+    let data = await fetch("http://localhost:1337/api/getSlugs").then(
+        (response) => response.json()
+    );
     // console.log("data: " + data[0].seo_url)
     // console.log("object values: " + Object.values(data))
-    const articles = data.map(({ seo_url }) => { return { params: { article: seo_url } } })
+    const articles = data.map(({ seo_url }) => {
+        return { params: { article: seo_url } };
+    });
     // console.log(articles)
-    return articles
+    return articles;
 }
 
 const { article } = Astro.params;
-const content = await fetch("http://localhost:1337/api/getArticle/" + article).then((res) => res.json())
-const articleImage = content.featuredImage.url
-
+const content = await fetch(
+    "http://localhost:1337/api/getArticle/" + article
+).then((res) => res.json());
+const articleImage = content.featuredImage.url;
 ---
 
 <Mast />
 <article class="cf mw9 center mt4-ns">
-
     <div class="fl w-100 w-60-ns pl5-ns pa3 pt2-ns">
         <div class="aspect-ratio aspect-ratio--4x3 mb4">
-            <div class="aspect-ratio--object cover" style={{backgroundImage: `url(${articleImage}); center`}}>
+            <div
+                class="aspect-ratio--object cover"
+                style={{ backgroundImage: `url(${articleImage}); center` }}
+            >
             </div>
         </div>
-        <h1 class="f2 lh-title fw9  mb3 mt0 pt3 bt bw2">
-            { content.title }
-            <p>url : {content.image_url }</p>
+        <h1 class="f2 lh-title fw9 mb3 mt0 pt3 bt bw2">
+            {content.title}
         </h1>
-        <h2 class="f3 mid-gray  lh-title">
-            { content.lede }
+        <h2 class="f3 mid-gray lh-title">
+            {content.lede}
         </h2>
-        <time class="f6 ttu tracked gray ">Sometime before 1967</time>
-        <div class="f5 f4-ns mid-gray lh-copy measure-wide mt3-ns roboto">
-
-            { content.body }
+        <time class="f6 ttu tracked gray">Sometime before 1967</time>
+        <div
+            class="f5 f4-ns mid-gray lh-copy measure-wide mt3-ns roboto"
+            set:html={content.body}
+        >
         </div>
-        <!-- {{ article.featuredImage.url }}
-                {{ article }} -->
-
-        <!-- "featuredImage": { "url": "https://ik.imagekit.io/nnydigital/strapi/patrick_weissenberger_u_Jhg_EX_Pq_S_Pk_unsplash_48d9beaa0c_us22_W0i_UW_8c176ff655_11vov1cyD.jpg",
-                "name": "patrick_weissenberger_u_Jhg_EX_Pq_S_Pk_unsplash_48d9beaa0c_us22W0iUW.jpg",
-                 "alternativeText": "patrick_weissenberger_u_Jhg_EX_Pq_S_Pk_unsplash_48d9beaa0c_us22W0iUW.jpg",
-                  "caption": "patrick_weissenberger_u_Jhg_EX_Pq_S_Pk_unsplash_48d9beaa0c_us22W0iUW.jpg" },
-                   "categories": [ { "Category": "Local" } ] } -->
-
-
-
     </div>
     <div class="fl w-100 w-40-ns pl4-ns pt2-ns">
         <ul class="list">
             <li class="ph3 pt0 pb4-ns pb3 ph4-ns bb b--black-10">
                 <b class="db f3 mb1">alignment</b>
                 <span class="f5 db lh-copy measure-narrow">
-                    The positioning of text within the page margins. Alignment can be flush left, flush right,
-                    justified, or centered. Flush left and flush right are sometimes referred to as left
-                    justified
-                    and right justified.</span>
+                    The positioning of text within the page margins. Alignment
+                    can be flush left, flush right, justified, or centered.
+                    Flush left and flush right are sometimes referred to as left
+                    justified and right justified.
+                </span>
             </li>
             <li class="pa3 pa4-ns bb b--black-10">
-                <b class="db f3 mb1">
-                    ascender
-                </b>
+                <b class="db f3 mb1"> ascender</b>
                 <span class="f5 db lh-copy measure-narrow">
-                    The part of lowercase letters (such as k, b, and d) that ascends above the
-                    x-height of the other lowercase letters in a face.
+                    The part of lowercase letters (such as k, b, and d) that
+                    ascends above the x-height of the other lowercase letters in
+                    a face.
                 </span>
             </li>
             <li class="ph3 pt0 pb4-ns pb3 ph4-ns bb b--black-10">
                 <b class="db f3 mb1">alignment</b>
                 <span class="f5 db lh-copy measure-narrow">
-                    The positioning of text within the page margins. Alignment can be flush left, flush right,
-                    justified, or centered. Flush left and flush right are sometimes referred to as left
-                    justified
-                    and right justified.</span>
-            </li>
-            <li class="pa3 pa4-ns bb b--black-10">
-                <b class="db f3 mb1">
-                    ascender
-                </b>
-                <span class="f5 db lh-copy measure-narrow">
-                    The part of lowercase letters (such as k, b, and d) that ascends above the
-                    x-height of the other lowercase letters in a face.
+                    The positioning of text within the page margins. Alignment
+                    can be flush left, flush right, justified, or centered.
+                    Flush left and flush right are sometimes referred to as left
+                    justified and right justified.
                 </span>
             </li>
-
+            <li class="pa3 pa4-ns bb b--black-10">
+                <b class="db f3 mb1"> ascender</b>
+                <span class="f5 db lh-copy measure-narrow">
+                    The part of lowercase letters (such as k, b, and d) that
+                    ascends above the x-height of the other lowercase letters in
+                    a face.
+                </span>
+            </li>
         </ul>
-
     </div>
 </article>
 <Footer />

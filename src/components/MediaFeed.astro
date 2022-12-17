@@ -1,29 +1,34 @@
 ---
 const { mediaFeed } = Astro.props;
-
 ---
 
 <ul class="list mt0-ns">
-    { mediaFeed.map(content =>
-    <article class="bb b--black-10">
-        <div class="db pv4 ph3 ph0-l">
-            <div class="flex flex-column flex-row-l">
-                <div class="pr3-ns mb4 mb0-ns w-100-m w-30-l">
-                    <img src={content.featuredImage.url} class="db"
-                        alt="Photo of a dimly lit room with a computer interface terminal.">
+    {
+        mediaFeed.map((content) => (
+            <article class="bb b--black-10">
+                <div class="db pv4 ph3 ph0-l">
+                    <div class="flex flex-column flex-row-l">
+                        <div class="pr3-ns mb4 mb0-ns w-100-m w-30-l">
+                            <img
+                                src={content.featuredImage.url}
+                                class="db"
+                                alt="Photo of a dimly lit room with a computer interface terminal."
+                            />
+                        </div>
+                        <div class="w-100-m w-60-l pl3-l">
+                            <a href={content.seo_url} class="navy link dim">
+                                <h1 class="f3 fw1  mt0 lh-title measure-narrow">
+                                    {content.title}
+                                </h1>
+                            </a>
+                            <p class="f6 fw3 f5-l lh-copy measure">
+                                {content.lede}
+                            </p>
+                            <p class="f6 lh-copy mv0">By Robin Darnell</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="w-100-m w-60-l pl3-l">
-                    <a href={content.seo_url} class="no-underline black dim">
-                        <h1 class="f3 fw1  mt0 lh-title measure-narrow">{ content.title }</h1>
-                    </a>
-                    <p class="f6 fw3 f5-l lh-copy measure">
-
-                        { content.lede }
-                    </p>
-                    <p class="f6 lh-copy mv0">By Robin Darnell</p>
-                </div>
-            </div>
-        </div>
-    </article>
-    )}
+            </article>
+        ))
+    }
 </ul>
